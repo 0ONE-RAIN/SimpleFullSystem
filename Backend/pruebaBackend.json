@@ -1,0 +1,186 @@
+{
+  "info": {
+    "name": "pruebaBackend",
+    "description": null,
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "CREATE USER",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{url}}/users",
+              "protocol": "",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "users"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"dael3w\",\n  \"email\": \"daniel@gmail.com\",\n  \"password\": \"123safdsafd\",\n  \"address\": {\n    \"street\": \"noneasdf\",\n    \"country\": \"noneasdf\",\n    \"city\": \"noneasdf\",\n    \"zip_code\": \"noneasd\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "GET USERS ALL",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{url}}/users",
+              "protocol": "",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "users"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "GET USER",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{url}}/users/{{userId}}",
+              "protocol": "",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "users",
+                "{{userId}}"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "UPDATE USER",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{url}}/users/{{userId}}",
+              "protocol": "",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "users",
+                "{{userId}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"test2\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "DELETE USER",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{url}}/users/{{userId}}",
+              "protocol": "",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "users",
+                "{{userId}}"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "GET USER BY ADDRES",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{url}}/users/{{userId}}",
+              "protocol": "",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "users",
+                "{{userId}}"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "url",
+      "value": "http://localhost:3000/api",
+      "type": "default"
+    },
+    {
+      "key": "userId",
+      "value": "",
+      "type": "default"
+    }
+  ]
+}
