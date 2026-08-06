@@ -47,7 +47,7 @@ pnpm start        # producción
 El servidor escucha en `http://localhost:3000` (verificar: `GET /health`).
 
 
-## Collecion para probar enpoints
+## Collecion para probar Endpoints
 
 Carpeta de Usuario contiene los enpoints, exporte la collecion a postman
 
