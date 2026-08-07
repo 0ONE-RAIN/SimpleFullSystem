@@ -13,7 +13,9 @@ import {
 } from "lucide-react";
 import { userProductStore } from "@/stores/use-product.store";
 import { ProductFormValues, productSchema } from "@/types/product";
-import { Modal, ModalOrigin } from "@/components/ui/modal.component";
+import { getNextCodigo } from "@/lib/products";
+import { cancelButtonClass, darkButtonClass, infoButtonClass } from "@/lib/button-styles";
+import { Modal, ModalOrigin } from "@/components/ui/modal";
 
 const inputBaseClass =
   "mt-1 w-full rounded-lg border bg-white/70 px-3 py-2 text-sm text-stone-900 placeholder:text-stone-400 focus:outline-none focus:ring-2";
@@ -22,9 +24,8 @@ const inputErrorClass = "border-red-300 focus:border-red-400 focus:ring-red-200"
 
 export function ProductFormModal() {
   const addProduct = userProductStore((state) => state.addProduct);
-  const nextCodigo = userProductStore(
-    (state) =>
-      state.products.reduce((max, p) => Math.max(max, p.codigo), 0) + 1,
+  const nextCodigo = userProductStore((state) =>
+    getNextCodigo(state.products),
   );
 
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -90,7 +91,7 @@ export function ProductFormModal() {
         ref={triggerRef}
         type="button"
         onClick={openModal}
-        className="inline-flex items-center gap-2 rounded-xl bg-stone-900 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-stone-800 focus:outline-none focus:ring-2 focus:ring-stone-400 focus:ring-offset-2"
+        className="inline-flex items-center gap-2 rounded-xl bg-custom-dark px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-stone-800 focus:outline-none focus:ring-2 focus:ring-stone-400 focus:ring-offset-2 pointer"
       >
         <Plus className="h-4 w-4" />
         Agregar Producto
@@ -114,7 +115,7 @@ export function ProductFormModal() {
               <button
                 type="button"
                 onClick={closeModal}
-                className="rounded-lg border border-stone-200 bg-white px-4 py-2 text-sm font-medium text-stone-600 transition hover:bg-stone-50"
+                className={cancelButtonClass}
               >
                 Cancelar
               </button>
@@ -122,7 +123,7 @@ export function ProductFormModal() {
                 type="submit"
                 form="product-form"
                 disabled={!isValid}
-                className="inline-flex items-center gap-2 rounded-lg bg-stone-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-stone-800 disabled:cursor-not-allowed disabled:opacity-40"
+                className={darkButtonClass}
               >
                 Continuar
                 <ArrowRight className="h-4 w-4" />
@@ -133,14 +134,14 @@ export function ProductFormModal() {
               <button
                 type="button"
                 onClick={closeModal}
-                className="rounded-lg border border-stone-200 bg-white px-4 py-2 text-sm font-medium text-stone-600 transition hover:bg-stone-50"
+                className={cancelButtonClass}
               >
                 Cancelar
               </button>
               <button
                 type="button"
                 onClick={confirmCreate}
-                className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-blue-500"
+                className={infoButtonClass}
               >
                 <Check className="h-4 w-4" />
                 Crear Producto
@@ -225,7 +226,7 @@ export function ProductFormModal() {
         ) : (
           preview && (
             <div className="overflow-hidden rounded-xl border border-blue-100 bg-blue-50/50">
-              <div className="flex items-center gap-2 border-b border-blue-100 bg-lienar-to-r from-blue-500 to-blue-400 px-4 py-3">
+              <div className="flex items-center gap-2 border-b border-blue-100 bg-linear-to-r from-blue-500 to-blue-400 px-4 py-3">
                 <Package className="h-4 w-4 text-white" />
                 <h3 className="text-sm font-semibold text-white">
                   Nuevo producto

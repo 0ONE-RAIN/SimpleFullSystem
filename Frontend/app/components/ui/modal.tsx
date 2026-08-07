@@ -70,7 +70,7 @@ export function Modal({
   return createPortal(
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div
-        className="modal-backdrop-in absolute inset-0 bg-stone-950/60 backdrop-blur-sm"
+        className="modal-backdrop-in absolute inset-0 bg-stone-900/60 backdrop-blur-sm"
         onClick={onClose}
         aria-hidden="true"
       />
@@ -78,7 +78,7 @@ export function Modal({
         role="dialog"
         aria-modal="true"
         aria-label={title}
-        className={`modal-panel-in relative w-full max-w-md overflow-hidden rounded-2xl border ${styles.border} bg-linear-to-b from-white/90 via-white/70 to-white/40 backdrop-blur-xl shadow-2xl ${styles.shadow}`}
+        className={`modal-panel-in relative w-full max-w-md overflow-hidden rounded-2xl border ${styles.border} bg-white backdrop-blur-xl shadow-2xl ${styles.shadow}`}
         style={
           origin ? { transformOrigin: `${origin.x}% ${origin.y}%` } : undefined
         }

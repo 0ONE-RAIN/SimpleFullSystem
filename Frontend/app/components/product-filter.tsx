@@ -2,7 +2,7 @@
 
 import { ChevronDown, ListFilter, Search } from "lucide-react";
 import { userProductStore } from "@/stores/use-product.store";
-import { SortBy } from "@/types/product";
+import type { SortBy } from "@/types/product";
 
 export function ProductFilter() {
   const searchQuery = userProductStore((state) => state.searchQuery);

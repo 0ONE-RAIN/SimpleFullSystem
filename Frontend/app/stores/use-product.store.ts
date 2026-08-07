@@ -1,5 +1,6 @@
 import { createJSONStorage, persist } from "zustand/middleware";
 import { Product, SortBy } from "../types/product";
+import { getNextCodigo } from "../lib/products";
 import { create } from "zustand";
 
 interface ProductState {
@@ -20,16 +21,16 @@ export const userProductStore = create<ProductState>()(
       searchQuery: "",
       sortBy: "creacion",
       addProduct: (newProduct) =>
-        set((state) => {
-          const codigo =
-            state.products.reduce((max, p) => Math.max(max, p.codigo), 0) + 1;
-          return {
-            products: [
-              ...state.products,
-              { ...newProduct, codigo, creacion: new Date().toISOString() },
-            ],
-          };
-        }),
+        set((state) => ({
+          products: [
+            ...state.products,
+            {
+              ...newProduct,
+              codigo: getNextCodigo(state.products),
+              creacion: new Date().toISOString(),
+            },
+          ],
+        })),
       deleteProduct: (codigo) =>
         set((state) => ({
           products: state.products.filter((c) => c.codigo !== codigo),

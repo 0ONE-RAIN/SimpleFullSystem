@@ -1,6 +1,6 @@
-import { ListProduct } from "@/components/product-list.component";
-import { ProductFilter } from "@/components/product-filter.component";
-import { ProductFormModal } from "@/components/product-form-modal.component";
+import { ListProduct } from "@/components/product-list";
+import { ProductFilter } from "@/components/product-filter";
+import { ProductFormModal } from "@/components/product-form-modal";
 
 export default function Home() {
   return (

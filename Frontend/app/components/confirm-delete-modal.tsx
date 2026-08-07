@@ -2,10 +2,8 @@
 
 import { AlertTriangle, Hash, Package, Trash2 } from "lucide-react";
 import type { Product } from "@/types/product";
-import {
-  Modal,
-  type ModalOrigin,
-} from "@/components/ui/modal.component";
+import { cancelButtonClass, dangerButtonClass } from "@/lib/button-styles";
+import { Modal, type ModalOrigin } from "@/components/ui/modal";
 
 interface ConfirmDeleteModalProps {
   product: Product | null;
@@ -34,14 +32,14 @@ export function ConfirmDeleteModal({
           <button
             type="button"
             onClick={onClose}
-            className="rounded-lg border border-stone-200 bg-white px-4 py-2 text-sm font-medium text-stone-600 transition hover:bg-stone-50"
+            className={cancelButtonClass}
           >
             Cancelar
           </button>
           <button
             type="button"
             onClick={() => product && onConfirm(product)}
-            className="inline-flex items-center gap-2 rounded-lg bg-red-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-red-500"
+            className={dangerButtonClass}
           >
             <Trash2 className="h-4 w-4" />
             Eliminar
@@ -50,7 +48,7 @@ export function ConfirmDeleteModal({
       }
     >
       {product && (
-        <div className="overflow-hidden rounded-xl border border-red-100 bg-red-50/50">
+        <div className="overflow-hidden rounded-xl border border-red-100 bg-custom-alert">
           <div className="flex items-center gap-2 border-b border-red-100 bg-linear-to-r from-red-500 to-red-400 px-4 py-3">
             <AlertTriangle className="h-4 w-4 text-white" />
             <h3 className="text-sm font-semibold text-white">

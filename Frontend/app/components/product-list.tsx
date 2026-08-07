@@ -10,8 +10,9 @@ import {
 } from "lucide-react";
 import { userProductStore } from "@/stores/use-product.store";
 import type { Product } from "@/types/product";
-import { ConfirmDeleteModal } from "@/components/confirm-delete-modal.component";
-import type { ModalOrigin } from "@/components/ui/modal.component";
+import { filterAndSortProducts } from "@/lib/products";
+import { ConfirmDeleteModal } from "@/components/confirm-delete-modal";
+import type { ModalOrigin } from "@/components/ui/modal";
 
 export function ListProduct() {
   const products = userProductStore((state) => state.products);
@@ -22,30 +23,10 @@ export function ListProduct() {
   const [productToDelete, setProductToDelete] = useState<Product | null>(null);
   const [deleteOrigin, setDeleteOrigin] = useState<ModalOrigin | undefined>();
 
-  const sortedProducts = useMemo(() => {
-    const query = searchQuery.trim().toLowerCase();
-    const filtered = products.filter((p) =>
-      query
-        ? p.nombre.toLowerCase().includes(query) ||
-          p.descripcion.toLowerCase().includes(query)
-        : true,
-    );
-    return [...filtered].sort((a, b) => {
-      switch (sortBy) {
-        case "nombre":
-          return a.nombre.localeCompare(b.nombre);
-        case "cantidad":
-          return b.cantidad - a.cantidad;
-        case "codigo":
-          return a.codigo - b.codigo;
-        case "creacion":
-        default:
-          return (
-            new Date(b.creacion).getTime() - new Date(a.creacion).getTime()
-          );
-      }
-    });
-  }, [products, searchQuery, sortBy]);
+  const sortedProducts = useMemo(
+    () => filterAndSortProducts(products, searchQuery, sortBy),
+    [products, searchQuery, sortBy],
+  );
 
   const requestDelete = (
     product: Product,
