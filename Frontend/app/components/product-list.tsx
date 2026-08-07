@@ -59,13 +59,13 @@ export function ListProduct() {
           </p>
         </div>
       ) : (
-        <ul className="flex flex-col divide-y divide-stone-200">
+        <ul className="@container flex flex-col divide-y divide-stone-200 flex-wrap justify-between items-stretch">
           {sortedProducts.map((p) => (
             <li
               key={p.codigo}
-              className="flex items-center justify-between gap-4 py-4 first:pt-0 last:pb-0"
+              className="flex sm:flex-row flex-col items-center flex-wrap justify-between gap-4 py-4 first:pt-0 last:pb-0"
             >
-              <div className="flex min-w-0 items-center gap-3">
+              <div className="xs:w-full xs:justify-center flex min-w-0 items-center gap-3 flex-wrap flex-col sm:flex-row">
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-blue-500">
                   <Package className="h-5 w-5" />
                 </span>
@@ -78,7 +78,7 @@ export function ListProduct() {
                   </p>
                 </div>
               </div>
-              <div className="flex shrink-0 items-center gap-4">
+              <div className="xs:justify-start justify-center sm:flex-row flex-col flex sm:shrink-0  items-center gap-4">
                 <div className="text-right">
                   <p className="text-sm font-semibold text-stone-900">
                     {p.cantidad} uds

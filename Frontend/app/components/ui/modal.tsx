@@ -111,7 +111,7 @@ export function Modal({
           </div>
           {children && <div className="mt-5">{children}</div>}
           {footer && (
-            <div className="mt-6 flex justify-end gap-3">{footer}</div>
+            <div className="mt-6 flex sm:flex-row flex-col justify-end gap-3">{footer}</div>
           )}
         </div>
       </div>
