@@ -1,10 +1,38 @@
 {
   "info": {
     "name": "pruebaBackend",
-    "description": null,
+    "description": "Colección de prueba para los endpoints de usuarios de la API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "GET HEALTH",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "Verifica que el servidor esté corriendo",
+            "url": {
+              "raw": "{{url}}/health",
+              "protocol": "",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "health"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        }
+      ]
+    },
     {
       "name": "Users",
       "item": [
@@ -16,22 +44,22 @@
             "auth": {
               "type": "noauth"
             },
-            "description": "",
+            "description": "Crea un usuario. Devuelve 201 y el objeto creado. Campos requeridos: nombre, email, direcciones",
             "url": {
-              "raw": "{{url}}/users",
+              "raw": "{{url}}/usuarios",
               "protocol": "",
               "host": [
                 "{{url}}"
               ],
               "path": [
-                "users"
+                "usuarios"
               ],
               "query": [],
               "variable": []
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"name\": \"dael3w\",\n  \"email\": \"daniel@gmail.com\",\n  \"password\": \"123safdsafd\",\n  \"address\": {\n    \"street\": \"noneasdf\",\n    \"country\": \"noneasdf\",\n    \"city\": \"noneasdf\",\n    \"zip_code\": \"noneasd\"\n  }\n}",
+              "raw": "{\n  \"nombre\": \"Juan Perez\",\n  \"email\": \"juan.perez@example.com\",\n  \"edad\": 30,\n  \"direcciones\": [\n    {\n      \"calle\": \"Av. Principal 123\",\n      \"ciudad\": \"Lima\",\n      \"pais\": \"Perú\",\n      \"codigo_postal\": \"15001\"\n    }\n  ]\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -48,38 +76,104 @@
             "auth": {
               "type": "noauth"
             },
-            "description": "",
+            "description": "Lista todos los usuarios con paginación. Parámetros opcionales: page (default 1), limit (default 10, máx 100)",
             "url": {
-              "raw": "{{url}}/users",
+              "raw": "{{url}}/usuarios?page=1&limit=10",
               "protocol": "",
               "host": [
                 "{{url}}"
               ],
               "path": [
-                "users"
+                "usuarios"
               ],
-              "query": [],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1",
+                  "description": "Número de página"
+                },
+                {
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Cantidad de resultados por página"
+                }
+              ],
               "variable": []
             }
           }
         },
         {
-          "name": "GET USER",
+          "name": "SEARCH USERS BY ADDRESS",
           "request": {
             "method": "GET",
             "header": [],
             "auth": {
               "type": "noauth"
             },
-            "description": "",
+            "description": "Busca usuarios por dirección. Requiere al menos un parámetro: calle, ciudad, pais o codigo_postal. Paginado con page y limit",
             "url": {
-              "raw": "{{url}}/users/{{userId}}",
+              "raw": "{{url}}/usuarios/buscar?ciudad=Lima",
               "protocol": "",
               "host": [
                 "{{url}}"
               ],
               "path": [
-                "users",
+                "usuarios",
+                "buscar"
+              ],
+              "query": [
+                {
+                  "key": "ciudad",
+                  "value": "Lima",
+                  "description": "Filtro por ciudad"
+                },
+                {
+                  "key": "calle",
+                  "value": "",
+                  "description": "Filtro por calle"
+                },
+                {
+                  "key": "pais",
+                  "value": "",
+                  "description": "Filtro por país"
+                },
+                {
+                  "key": "codigo_postal",
+                  "value": "",
+                  "description": "Filtro por código postal"
+                },
+                {
+                  "key": "page",
+                  "value": "1",
+                  "description": "Número de página"
+                },
+                {
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Cantidad de resultados por página"
+                }
+              ],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "GET USER BY ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "Obtiene un usuario por su ID. El id debe ser un ObjectId de MongoDB válido (24 caracteres hexadecimales)",
+            "url": {
+              "raw": "{{url}}/usuarios/{{userId}}",
+              "protocol": "",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "usuarios",
                 "{{userId}}"
               ],
               "query": [],
@@ -90,20 +184,20 @@
         {
           "name": "UPDATE USER",
           "request": {
-            "method": "PATCH",
+            "method": "PUT",
             "header": [],
             "auth": {
               "type": "noauth"
             },
-            "description": "",
+            "description": "Actualiza un usuario por su ID. Puede enviar nombre, email, edad y/o direcciones. Se debe proporcionar al menos un campo",
             "url": {
-              "raw": "{{url}}/users/{{userId}}",
+              "raw": "{{url}}/usuarios/{{userId}}",
               "protocol": "",
               "host": [
                 "{{url}}"
               ],
               "path": [
-                "users",
+                "usuarios",
                 "{{userId}}"
               ],
               "query": [],
@@ -111,7 +205,7 @@
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"name\": \"test2\"\n}",
+              "raw": "{\n  \"edad\": 31,\n  \"direcciones\": [\n    {\n      \"calle\": \"Jr. Los Olivos 456\",\n      \"ciudad\": \"Lima\",\n      \"pais\": \"Perú\",\n      \"codigo_postal\": \"15002\"\n    }\n  ]\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -128,39 +222,15 @@
             "auth": {
               "type": "noauth"
             },
-            "description": "",
+            "description": "Elimina un usuario por su ID",
             "url": {
-              "raw": "{{url}}/users/{{userId}}",
+              "raw": "{{url}}/usuarios/{{userId}}",
               "protocol": "",
               "host": [
                 "{{url}}"
               ],
               "path": [
-                "users",
-                "{{userId}}"
-              ],
-              "query": [],
-              "variable": []
-            }
-          }
-        },
-        {
-          "name": "GET USER BY ADDRES",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "auth": {
-              "type": "noauth"
-            },
-            "description": "",
-            "url": {
-              "raw": "{{url}}/users/{{userId}}",
-              "protocol": "",
-              "host": [
-                "{{url}}"
-              ],
-              "path": [
-                "users",
+                "usuarios",
                 "{{userId}}"
               ],
               "query": [],
@@ -174,7 +244,7 @@
   "variable": [
     {
       "key": "url",
-      "value": "http://localhost:3000/api",
+      "value": "http://localhost:3000",
       "type": "default"
     },
     {
